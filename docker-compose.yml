@@ -1,0 +1,44 @@
+version: '3'
+services:
+  front-end:
+    image: node:20
+    container_name: front-end-next
+    working_dir: /app
+    volumes:
+      - ./front-end-next:/app
+      - /app/node_modules
+    ports:
+      - "3001:3000"
+    command: >
+      sh -c "npm install && npm run dev"
+
+  back-end:
+    image: node:20
+    container_name: back-end-nest
+    working_dir: /app
+    volumes:
+      - ./back-end-nest:/app
+      - /app/node_modules
+    ports:
+      - "3002:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/nest_db
+    depends_on:
+      - mongo
+    command: >
+      sh -c "npm install && npm run start:dev"
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongo_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Nest@2020
+      MONGO_INITDB_DATABASE: nest_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
