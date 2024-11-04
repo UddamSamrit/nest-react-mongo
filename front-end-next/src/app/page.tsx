@@ -6,7 +6,7 @@ import ShowTask from "@/app/components/task/ShowTask";
 import FormInput from "@/app/components/task/FormInput";
 import { getAll } from './api/task/route';
 import { useAuth } from "@/app/context/AuthContext";
-import {useRouter} from "next/navigation";
+import { useRouter } from 'next/router';
 
 
 interface DataItem {
