@@ -13,7 +13,7 @@ export class TaskService {
   }
 
   async findAll(): Promise<Task[]> {
-    return await this.taskModel.find().exec();
+    return await this.taskModel.find().sort({ createdAt: -1 }).exec();
   }
 
   async findOne(id: string) {

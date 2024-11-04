@@ -1,7 +1,10 @@
 version: '3'
 services:
   front-end:
-    image: node:20
+    build:
+      context: .
+      dockerfile: DockerfileFront
+    restart: always
     container_name: front-end-next
     working_dir: /app
     volumes:
@@ -41,7 +44,6 @@ services:
 
   mongo:
     image: mongo
-    restart: always
     container_name: mongo_db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
