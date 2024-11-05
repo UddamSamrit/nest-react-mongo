@@ -56,6 +56,18 @@ services:
     networks:
       - nest-react-mongo-network
 
+  mongo-express:
+    image: mongo-express
+    container_name: mongo_express
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://root:Nest2020@mongo_db:27017/nest_db?authSource=admin
+      ME_CONFIG_BASICAUTH: "false"
+    ports:
+      - "7081:8081"
+    networks:
+      - nest-react-mongo-network
+    depends_on:
+      - mongo
 
 #Docker Networks
 networks:
